@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paiyuan.table2json.mapper.ItemMapper">
+
+    <resultMap id="itemInfo" type="com.paiyuan.table2json.entity.Item">
+        <result column="bzdid" jdbcType="VARCHAR" property="id" />
+        <result column="mc" jdbcType="VARCHAR" property="title" />
+        <result column="sjid" jdbcType="VARCHAR" property="parentId" />
+    </resultMap>
+
+    <resultMap id="projectInfo" type="com.paiyuan.table2json.entity.Item">
+        <result column="xmdh" jdbcType="VARCHAR" property="id" />
+        <result column="xmmc" jdbcType="VARCHAR" property="title" />
+    </resultMap>
+    
+    <select id="getAllItems" resultMap="itemInfo">
+        select
+        bzdid,
+        mc,
+        sjid
+        from uf_DesignWork
+    </select>
+    
+    <select id="getProjectInfo" resultMap="itemInfo">
+        select
+        xmdh,
+        xmmc
+        from uf_MyProject
+        where xmdh = #{projectId}
+    </select>
+</mapper>
